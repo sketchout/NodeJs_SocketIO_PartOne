@@ -147,7 +147,13 @@ io.sockets.on('connection', function(socket) {
 ```
 
 ## Run Screenshot
-1. beforeChat: 
+
+1. before Chat: 
+
 ![alt text]( https://github.com/sketchout/NodeJs_SocketIO_PartOne/blob/master/beforeChat.PNG "input userid")
+
+2. on Chat: 
+
+![alt text]( https://github.com/sketchout/NodeJs_SocketIO_PartOne/blob/master/onChat.PNG "send message")
 
 
