@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div-chat-display {
+            height:350px;
+            width:500px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- 4. definition form -->
+    <h3>Just simple your webChat ( v 0.0.1,  @stanwix , 21-Apr-2016 ) </h3>
+    <div id="container-id">
+        <form id="form-input-userid">
+            your ID :  <input size="15" id="input-userid"/>
+            <input type="submit" value="Join"/>
+        </form>
+    </div>
+    <div id="container-message" style="display: none;">
+        <div id="div-chat-display"></div>
+        <form id="form-send-message">
+            <input size="35" id="input-message"/>
+            <input type="submit" value="Send"/>
+        </form>
+    </div>
+    <!-- 5. setup js script -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+    <!-- 6. send message function -->
+    <script>
+        jQuery(function($){
+
+            var socket = io.connect();
+
+            // userid container
+            var $useridInputForm = $('#form-input-userid');
+            var $useridInput = $('#input-userid');
+
+            // message container
+            var $messageSendForm = $('#form-send-message');
+            var $messageInput = $('#input-message');
+            var $displayChatDiv = $('#div-chat-display');
+
+
+            $useridInputForm.submit( function(e) {
+
+                e.preventDefault();
+
+                if ( $useridInput.val().length == 0) {
+
+                    alert("Please choose your chat ID...");
+
+                } else {
+                    $("#container-id").hide();
+                    $("#container-message").show();
+                    // $("#hidden-name").val( $useridInput );
+                }
+            });
+
+            $messageSendForm.submit(function(e) {
+
+                e.preventDefault();
+
+                console.log( "name:" + $useridInput );
+
+                socket.emit('messageSend', { name : $useridInput.val(),
+                                            data : $messageInput.val() } );
+                $messageInput.val('');
+            });
+
+            <!-- 8. io handle -->
+            socket.on('messageBroadcast', function(parameters) {
+
+                var name = parameters.name;
+                var data = parameters.data;
+
+                $displayChatDiv.append( "["+name+"]" +data + "<br/>");
+                // auto scroll
+                $('#div-chat-display').scrollTop($('#div-chat-display').prop("scrollHeight"));
+            });
+
+        });
+    </script>
+</body>
+</html>
