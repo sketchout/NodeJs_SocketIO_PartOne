@@ -1,9 +1,15 @@
 # NodeJs_SocketIO_PartOne 
 ## Just simple your webChat v 0.0.1
+> This is a simple web chat through nodeJS & socket.io.
+> 이 예제는 간단하게 웹채팅을 nodeJS와 socket.io를 통해서 구현했다.
 
 Thanks to  [Smitha Milli]( https://www.youtube.com/watch?v=pNKNYLv2BpQ ) 
 > Create a basic chat application using node.js, socket.io, and express by the end of this video. 
 
+New things
+> This added some features from orginal. First can select a userid and message can scroll, but can't not delete message.
+> 이 예제는 원래자료를 참고해서 수정이 되었다. 첫째로 유저아이디를 선택하고, 메시지는 스크롤이되지만, 메시지를 삭제하지는
+> 않는다.
 
 ## 0. edit package.json ( Run  npm install )
 ```javascript
