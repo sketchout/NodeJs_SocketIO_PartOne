@@ -3,35 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- 4. definition form -->
     <style>
         #div-chat-display {
-            height:350px;
-            width:500px;
+            height: 400px;
             overflow-x: hidden;
-            overflow-y: auto;
+        }
+        .alert {
+            display: inline-block;
+            margin-left:20px;
+            margin-right:20px;
         }
     </style>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
     <!-- 4. definition form -->
-    <h3>Just simple your webChat ( v 0.0.1,  @stanwix , 21-Apr-2016 ) </h3>
-    <div id="container-id">
-        <form id="form-input-userid">
-            your ID :  <input size="15" id="input-userid"/>
-            <input type="submit" value="Join"/>
-        </form>
-    </div>
-    <div id="container-message" style="display: none;">
-        <div id="div-chat-display"></div>
-        <form id="form-send-message">
-            <input size="35" id="input-message"/>
-            <input type="submit" value="Send"/>
-        </form>
+    <div class="container">
+        <div class="page-header">
+            <h2 class="text-primary">Just simple your `webChat </h2>
+            <p> version : 0.0.1, date : 21-Apr-2016 , author : stanwix@gmail.com </p>
+        </div>
+        <div id="container-id">
+            <form class="form-inline" role="form" id="form-input-userid">
+
+                <div class="form-group">
+                    <label class="control-label">Your ID :</label>
+                    <input class="form-control" id="input-userid" name="input-userid" autofocus/>
+                </div>
+                <button class="btn btn-default btn-info" type="submit">Join</button>
+            </form>
+        </div>
+        <div class="col-xs-offset-2 col-xs-8" id="container-message" style="display: none;">
+            <div id="div-chat-display"></div>
+            <form class="pull-right form-inline" role="form" id="form-send-message">
+                <label class="control-label" id="lbl-id-display"></label>
+                <input class="form-control" id="input-message" name="input-message" type="text" />
+                <input class="btn btn-default btn-info" type="submit" value="Send"/>
+            </form>
+        </div>
     </div>
     <!-- 5. setup js script -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- 6. send message function -->
     <script>
         jQuery(function($){
@@ -46,7 +61,7 @@
             var $messageSendForm = $('#form-send-message');
             var $messageInput = $('#input-message');
             var $displayChatDiv = $('#div-chat-display');
-
+            var $displayIdLbl = $('#lbl-id-display');
 
             $useridInputForm.submit( function(e) {
 
@@ -57,9 +72,12 @@
                     alert("Please choose your chat ID...");
 
                 } else {
+                    $useridInput.autofocus = false;
                     $("#container-id").hide();
                     $("#container-message").show();
                     // $("#hidden-name").val( $useridInput );
+                    $displayIdLbl.append( " "+ $useridInput.val() + " >  " );
+                    $messageInput.autofocus = true;
                 }
             });
 
@@ -80,9 +98,20 @@
                 var name = parameters.name;
                 var data = parameters.data;
 
-                $displayChatDiv.append( "["+name+"]" +data + "<br/>");
+                $displayChatDiv.append("<div class='container-fluid'>");
+                if ( name == $useridInput.val() ) {
+                    $displayChatDiv.append( "<div class='pull-right alert alert-warning'><strong> "+
+                            name+"</strong> > "+data +
+                            "</div>");
+                } else {
+                    $displayChatDiv.append( "<div class='alert alert-success'> <strong>"+
+                            name+"</strong> > "+data +
+                            "</div></div>");
+                }
+                $displayChatDiv.append("</div>");
                 // auto scroll
                 $('#div-chat-display').scrollTop($('#div-chat-display').prop("scrollHeight"));
+
             });
 
         });
