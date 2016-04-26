@@ -156,17 +156,28 @@ io.sockets.on('connection', function(socket) {
 });
 ```
 
-## Run Screenshot
+## Run Screenshot (v1)
 
 1. before Chat: 
 
-![alt text]( https://github.com/sketchout/NodeJs_SocketIO_PartOne/blob/master/beforeChat.PNG "input userid")
+![alt text]( https://github.com/sketchout/NodeJs_SocketIO_PartOne/blob/master/screenshot/v1_beforeChat.PNG "input userid")
 
 2. on Chat: 
 
-![alt text]( https://github.com/sketchout/NodeJs_SocketIO_PartOne/blob/master/onChat.PNG "send message")
+![alt text]( https://github.com/sketchout/NodeJs_SocketIO_PartOne/blob/master/screenshot/v1_onChat.PNG "send message")
 
 ## Thanks to
 > [Smitha Milli]( https://www.youtube.com/watch?v=pNKNYLv2BpQ ) 
 > Create a basic chat application using node.js, socket.io, and express by the end of this video. 
+
+
+## Run Screenshot (v2)
+
+1. before Chat: 
+
+![alt text]( https://github.com/sketchout/NodeJs_SocketIO_PartOne/blob/master/screenshot/v2_beforeChat2.PNG "input userid")
+
+2. on Chat: 
+
+![alt text]( https://github.com/sketchout/NodeJs_SocketIO_PartOne/blob/master/screenshot/v2_onChat2.PNG "send message")
 
